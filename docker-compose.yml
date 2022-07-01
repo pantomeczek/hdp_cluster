@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  namenode: 
+    image: namenode:1.0
+    container_name: namenode
+    ports:
+      - '2222:22'
+      - '9870:9870'
+      - '8088:8088'
+      - '7077:7077'
+      - '18080:18080'
+  datanode1:
+    image: datanode:1.0
+    container_name: datanode1
+    depends_on:
+      - 'namenode'
+    ports:
+      - '4041:4040'
+  datanode2: 
+    image: datanode:1.0
+    container_name: datanode2
+    depends_on:
+      - 'namenode'
+    ports:
+      - '4042:4040'
