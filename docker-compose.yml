@@ -8,8 +8,19 @@ services:
       - '2222:22'
       - '9870:9870'
       - '8088:8088'
+      - '8888:8888'
       - '7077:7077'
       - '18080:18080'
+      - '4040:4040'
+      - '10000:10000'
+      - '10002:10002'
+      - '60010:60010'
+      - '16010:16010'
+    volumes:
+      - "./cluster_data/namenode_data:/home/hdoop/hadoopfiles:rw"
+    #mem_limit: 4G
+    #mem_reservation: 2G
+
   datanode1:
     image: datanode:1.0
     container_name: datanode1
@@ -17,6 +28,11 @@ services:
       - 'namenode'
     ports:
       - '4041:4040'
+    volumes:
+      - "./cluster_data/datanode1_data:/home/hdoop/hadoopfiles:rw"   
+    #mem_limit: 2G
+    #mem_reservation: 1G
+
   datanode2: 
     image: datanode:1.0
     container_name: datanode2
@@ -24,3 +40,20 @@ services:
       - 'namenode'
     ports:
       - '4042:4040'
+    volumes:
+      - "./cluster_data/datanode2_data:/home/hdoop/hadoopfiles:rw"  
+   # mem_limit: 2G
+   # mem_reservation: 1G
+
+  datanode3: 
+    image: datanode:1.0
+    container_name: datanode3
+    depends_on:
+      - 'namenode'
+    ports:
+      - '4043:4040'
+    volumes:
+      - "./cluster_data/datanode3_data:/home/hdoop/hadoopfiles:rw"  
+   # mem_limit: 2G
+   # mem_reservation: 1G
+

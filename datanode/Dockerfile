@@ -15,8 +15,8 @@ RUN apt-get install -y ssh \
     && service ssh start
 
 RUN apt-get install -y openjdk-8-jdk \
-    && echo "JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >> /etc/environment \
-    && echo "JRE_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre" >> /etc/environment
+    && echo "JAVA_HOME=/usr/lib/jvm/java-8-openjdk-arm64" >> /etc/environment \
+    && echo "JRE_HOME=/usr/lib/jvm/java-8-openjdk-arm64/jre" >> /etc/environment
 
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ENV JRE_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
@@ -32,6 +32,8 @@ RUN mkdir /home/hdoop/.ssh \
 
 
 COPY ./hadoop-3.3.3 /home/hdoop/hadoop3
+
+COPY ./ssh_conf/authorized_keys /home/hdoop/.ssh/
 
 RUN chown hdoop:hdoop -R /home/hdoop
 
